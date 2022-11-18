@@ -20,7 +20,7 @@ public class OutputStorageController : MonoBehaviour
 
     void Start()
     {
-        manager = new ColorManager();
+        manager = gameObject.AddComponent<ColorManager>();
         Color tmp = manager.Colors[ResourceOut];
         tmp.a = 0.5f;
         gameObject.GetComponent<SpriteRenderer>().color = tmp;

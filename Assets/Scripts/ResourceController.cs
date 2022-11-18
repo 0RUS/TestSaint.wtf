@@ -5,19 +5,12 @@ public class ResourceController : MonoBehaviour
 {
     public int NumberOfResourcesToGenerate = 0;
 
-    public Text Text;
-
     public InputStorageController StorageIn;
     public OutputStorageController StorageOut;
 
     public float WaitTime = 3.0f;
     
     private float _timer = 0.0f;
-
-    private void Start()
-    {
-        Text.text = gameObject.name;
-    }
 
     void FixedUpdate()
     {

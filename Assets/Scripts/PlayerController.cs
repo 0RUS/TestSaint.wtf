@@ -1,43 +1,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 public class PlayerController : MonoBehaviour
 {
-    public float Speed = 5.0f;
-
-    public int MaxInventory = 4;
-
     public GameObject[] Items;
 
+    public int MaxInventory = 4;
     public int InventoryFull { get { return _inventory.Count; } }
     public List<Color> Inventory { get { return _inventory; } }
 
-    private Rigidbody2D _rigidbody2d;
-    private float _horizontal;
-    private float _vertical;
+    [SerializeField] private Rigidbody2D _rigidbody;
+    [SerializeField] private FixedJoystick _joystick;
+
+    [SerializeField] private float Speed;
 
     private List<Color> _inventory;
 
     void Start()
     {
-        _rigidbody2d = GetComponent<Rigidbody2D>();
+        _rigidbody = GetComponent<Rigidbody2D>();
         _inventory = new List<Color>();
         Refresh();
     }
 
-    void Update()
-    {
-        _horizontal = Input.GetAxis("Horizontal");
-        _vertical = Input.GetAxis("Vertical");
-    }
-
     void FixedUpdate()
     {
-        Vector2 position = _rigidbody2d.position;
-        position.x += Speed * _horizontal * Time.deltaTime;
-        position.y += Speed * _vertical * Time.deltaTime;
+        Vector2 position = _rigidbody.position;
+        position.x += Speed * _joystick.Horizontal * Time.deltaTime;
+        position.y += Speed * _joystick.Vertical * Time.deltaTime;
 
-        _rigidbody2d.MovePosition(position);
+        _rigidbody.MovePosition(position);
     }
 
     public void GiveItem(Color color)

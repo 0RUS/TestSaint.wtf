@@ -23,7 +23,7 @@ public class InputStorageController : MonoBehaviour
 
     void Start()
     {
-        manager = new ColorManager();
+        manager = gameObject.AddComponent<ColorManager>();
         Color tmp = Color.Lerp(manager.Colors[ResourceIn1],manager.Colors[ResourceIn2],0.5f);
         tmp.a = 0.5f;
         gameObject.GetComponent<SpriteRenderer>().color = tmp;
